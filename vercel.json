@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    { "source": "/life-sync/assistant", "destination": "/" },
+    { "source": "/life-sync/assistant/:path*", "destination": "/:path*" }
+  ]
+}
