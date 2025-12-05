@@ -16,22 +16,20 @@ export default function ChatMessage({ message }: ChatMessageProps) {
           isUser
             ? "bg-purple-600 text-white rounded-br-md"
             : "bg-gray-800 text-gray-100 rounded-bl-md"
-        }`}
-      >
+        }`}>
         {!isUser && (
-          <div className="flex items-center gap-2 mb-2 text-xs text-gray-400">
+          <div className='flex items-center gap-2 mb-2 text-xs text-gray-400'>
             <span>🤖</span>
             <span>Life-Sync Assistant</span>
           </div>
         )}
-        <div className="whitespace-pre-wrap text-sm leading-relaxed">
+        <div className='whitespace-pre-wrap text-sm leading-relaxed'>
           {formatMessage(message.content)}
         </div>
         <div
           className={`text-xs mt-2 ${
             isUser ? "text-purple-200" : "text-gray-500"
-          }`}
-        >
+          }`}>
           {new Date(message.timestamp).toLocaleTimeString([], {
             hour: "2-digit",
             minute: "2-digit",

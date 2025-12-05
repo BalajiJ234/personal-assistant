@@ -4,14 +4,14 @@ AI-powered personal assistant frontend for Life-Sync 2.0. This is the chat inter
 
 ## Part of Life-Sync 2.0 Ecosystem
 
-| Service | Type | Port | Path |
-|---------|------|------|------|
-| wealth-pulse-fe | Frontend | 3000 | /life-sync/wealthpulse |
-| life-notes-fe | Frontend | 3000 | /life-sync/lifenotes |
-| **personal-assistant** | Frontend | 3000 | /life-sync/assistant |
-| wealth-pulse-api | Backend | 3001 | /api |
-| life-notes-api | Backend | 3002 | /api |
-| personal-assistant-api | Backend | 3003 | /api |
+| Service                | Type     | Port | Path                   |
+| ---------------------- | -------- | ---- | ---------------------- |
+| wealth-pulse-fe        | Frontend | 3000 | /life-sync/wealthpulse |
+| life-notes-fe          | Frontend | 3000 | /life-sync/lifenotes   |
+| **personal-assistant** | Frontend | 3000 | /life-sync/assistant   |
+| wealth-pulse-api       | Backend  | 3001 | /api                   |
+| life-notes-api         | Backend  | 3002 | /api                   |
+| personal-assistant-api | Backend  | 3003 | /api                   |
 
 ## Features
 

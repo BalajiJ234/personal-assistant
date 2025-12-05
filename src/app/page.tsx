@@ -99,7 +99,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex h-screen">
+    <div className='flex h-screen'>
       {/* Sidebar */}
       <Sidebar
         conversations={conversations}
@@ -112,38 +112,36 @@ export default function Home() {
       />
 
       {/* Main Chat Area */}
-      <div className="flex-1 flex flex-col">
+      <div className='flex-1 flex flex-col'>
         {/* Header */}
-        <header className="bg-gray-900 border-b border-gray-800 px-4 py-3 flex items-center gap-3">
+        <header className='bg-gray-900 border-b border-gray-800 px-4 py-3 flex items-center gap-3'>
           <button
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="p-2 hover:bg-gray-800 rounded-lg lg:hidden"
-          >
+            className='p-2 hover:bg-gray-800 rounded-lg lg:hidden'>
             <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
+              className='w-5 h-5'
+              fill='none'
+              stroke='currentColor'
+              viewBox='0 0 24 24'>
               <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                strokeLinecap='round'
+                strokeLinejoin='round'
                 strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
+                d='M4 6h16M4 12h16M4 18h16'
               />
             </svg>
           </button>
-          <div className="flex items-center gap-2">
-            <span className="text-2xl">🤖</span>
-            <h1 className="text-lg font-semibold">Life-Sync Assistant</h1>
+          <div className='flex items-center gap-2'>
+            <span className='text-2xl'>🤖</span>
+            <h1 className='text-lg font-semibold'>Life-Sync Assistant</h1>
           </div>
-          <span className="text-xs bg-purple-600 px-2 py-1 rounded-full ml-2">
+          <span className='text-xs bg-purple-600 px-2 py-1 rounded-full ml-2'>
             Beta
           </span>
         </header>
 
         {/* Messages Area */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        <div className='flex-1 overflow-y-auto p-4 space-y-4'>
           {activeConversation?.messages.length === 0 ? (
             <WelcomeScreen onSuggestionClick={handleSendMessage} />
           ) : (
@@ -152,19 +150,19 @@ export default function Home() {
                 <ChatMessage key={message.id} message={message} />
               ))}
               {isLoading && (
-                <div className="flex items-center gap-2 text-gray-400">
-                  <div className="flex gap-1">
-                    <span className="w-2 h-2 bg-purple-500 rounded-full animate-bounce" />
+                <div className='flex items-center gap-2 text-gray-400'>
+                  <div className='flex gap-1'>
+                    <span className='w-2 h-2 bg-purple-500 rounded-full animate-bounce' />
                     <span
-                      className="w-2 h-2 bg-purple-500 rounded-full animate-bounce"
+                      className='w-2 h-2 bg-purple-500 rounded-full animate-bounce'
                       style={{ animationDelay: "0.1s" }}
                     />
                     <span
-                      className="w-2 h-2 bg-purple-500 rounded-full animate-bounce"
+                      className='w-2 h-2 bg-purple-500 rounded-full animate-bounce'
                       style={{ animationDelay: "0.2s" }}
                     />
                   </div>
-                  <span className="text-sm">Thinking...</span>
+                  <span className='text-sm'>Thinking...</span>
                 </div>
               )}
               <div ref={messagesEndRef} />
@@ -192,46 +190,44 @@ function WelcomeScreen({
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center h-full text-center px-4">
-      <div className="text-6xl mb-4">🤖</div>
-      <h2 className="text-2xl font-bold mb-2">Welcome to Life-Sync Assistant</h2>
-      <p className="text-gray-400 mb-8 max-w-md">
+    <div className='flex flex-col items-center justify-center h-full text-center px-4'>
+      <div className='text-6xl mb-4'>🤖</div>
+      <h2 className='text-2xl font-bold mb-2'>
+        Welcome to Life-Sync Assistant
+      </h2>
+      <p className='text-gray-400 mb-8 max-w-md'>
         I can help you manage your finances, notes, todos, and more. Ask me
         anything!
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-lg">
+      <div className='grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-lg'>
         {suggestions.map((suggestion, index) => (
           <button
             key={index}
             onClick={() => onSuggestionClick(suggestion.text)}
-            className="flex items-center gap-3 p-4 bg-gray-900 hover:bg-gray-800 rounded-xl border border-gray-800 transition-colors text-left"
-          >
-            <span className="text-2xl">{suggestion.icon}</span>
-            <span className="text-sm text-gray-300">{suggestion.text}</span>
+            className='flex items-center gap-3 p-4 bg-gray-900 hover:bg-gray-800 rounded-xl border border-gray-800 transition-colors text-left'>
+            <span className='text-2xl'>{suggestion.icon}</span>
+            <span className='text-sm text-gray-300'>{suggestion.text}</span>
           </button>
         ))}
       </div>
 
-      <div className="mt-8 flex gap-4 text-sm text-gray-500">
+      <div className='mt-8 flex gap-4 text-sm text-gray-500'>
         <a
-          href="/life-sync/wealth"
-          className="hover:text-purple-400 transition-colors"
-        >
+          href='/life-sync/wealth'
+          className='hover:text-purple-400 transition-colors'>
           💰 Wealth Pulse
         </a>
         <span>•</span>
         <a
-          href="/life-sync/notes"
-          className="hover:text-purple-400 transition-colors"
-        >
+          href='/life-sync/notes'
+          className='hover:text-purple-400 transition-colors'>
           📝 Life Notes
         </a>
         <span>•</span>
         <a
-          href="/life-sync"
-          className="hover:text-purple-400 transition-colors"
-        >
+          href='/life-sync'
+          className='hover:text-purple-400 transition-colors'>
           🏠 Gateway
         </a>
       </div>
@@ -247,7 +243,11 @@ function getSimulatedResponse(input: string): string {
     return "Based on your data from Wealth Pulse, you spent **₹12,500** this week. Your top categories were:\n\n- 🍔 Food: ₹4,200\n- 🚗 Transport: ₹3,100\n- 🛒 Shopping: ₹2,800\n- 🎬 Entertainment: ₹2,400\n\nWould you like me to show more details or compare with last week?";
   }
 
-  if (lowerInput.includes("task") || lowerInput.includes("todo") || lowerInput.includes("pending")) {
+  if (
+    lowerInput.includes("task") ||
+    lowerInput.includes("todo") ||
+    lowerInput.includes("pending")
+  ) {
     return "Here are your pending tasks from Life Notes:\n\n1. ✅ **Review PR** (High priority, due today)\n2. ✅ **Call dentist** (Medium priority)\n3. ✅ **Buy groceries** (Shopping list)\n4. ✅ **Complete DevOps module** (Goal)\n\nWould you like me to mark any as complete?";
   }
 
@@ -263,5 +263,9 @@ function getSimulatedResponse(input: string): string {
     return "Hello! 👋 I'm your Life-Sync Assistant. I can help you with:\n\n- 💰 **Expenses & Finances** from Wealth Pulse\n- 📝 **Notes & Todos** from Life Notes\n- 🎯 **Goals & Habits** tracking\n- 🛒 **Shopping lists**\n\nWhat would you like to know?";
   }
 
-  return "I understand you're asking about: \"" + input + "\"\n\nI'm currently in beta mode with simulated responses. Soon I'll be connected to your actual data from Wealth Pulse and Life Notes!\n\nTry asking about:\n- Your spending this week\n- Pending tasks\n- Active goals\n- Shopping list";
+  return (
+    "I understand you're asking about: \"" +
+    input +
+    "\"\n\nI'm currently in beta mode with simulated responses. Soon I'll be connected to your actual data from Wealth Pulse and Life Notes!\n\nTry asking about:\n- Your spending this week\n- Pending tasks\n- Active goals\n- Shopping list"
+  );
 }

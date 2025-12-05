@@ -14,7 +14,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Life-Sync Assistant | AI-Powered Personal Assistant",
-  description: "Your intelligent assistant for managing finances, notes, todos, and more.",
+  description:
+    "Your intelligent assistant for managing finances, notes, todos, and more.",
 };
 
 export default function RootLayout({
@@ -23,10 +24,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang='en' className='dark'>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-950 text-gray-100`}
-      >
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-950 text-gray-100`}>
         {children}
       </body>
     </html>
