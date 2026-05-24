@@ -103,9 +103,10 @@ function EditableRow({
 
   const getDate = () => {
     if (entry.type === "EXPENSE" || entry.type === "INCOME")
-      return (entry as ParsedTransaction).transactionDate;
-    if (entry.type === "COMMITMENT") return (entry as ParsedCommitment).dueDate;
-    return "";
+      return (entry as ParsedTransaction).transactionDate ?? '';
+    if (entry.type === "COMMITMENT") return (entry as ParsedCommitment).dueDate ?? '';
+    if (entry.type === "PURCHASE_GOAL") return (entry as ParsedPurchaseGoal).targetDate ?? '';
+    return '';
   };
 
   // ── Inline field update ──
@@ -149,6 +150,49 @@ function EditableRow({
       onUpdate({ ...(entry as ParsedTransaction), transactionDate: val });
     else if (entry.type === "COMMITMENT")
       onUpdate({ ...(entry as ParsedCommitment), dueDate: val });
+    else if (entry.type === "PURCHASE_GOAL")
+      onUpdate({ ...(entry as ParsedPurchaseGoal), targetDate: val });
+  }
+
+  function setType(newType: ParsedEntry["type"]) {
+    const currentTitle = getTitle();
+    const currentAmount = getAmount();
+    const currentCurrency = getCurrency();
+    const currentDate = getDate();
+    const currentCategory = getCategory();
+
+    if (newType === "EXPENSE" || newType === "INCOME") {
+      onUpdate({
+        id: entry.id, type: newType,
+        title: currentTitle, amount: currentAmount, currency: currentCurrency,
+        category: currentCategory || (newType === "INCOME" ? "Other Income" : "Other"),
+        transactionDate: currentDate || "",
+        confidenceScore: entry.confidenceScore,
+        source: (entry as Partial<ParsedTransaction>).source ?? "chat",
+        tags: [], notes: "", rawText: entry.rawText,
+      } as ParsedTransaction);
+    } else if (newType === "DEBT") {
+      onUpdate({
+        id: entry.id, type: "DEBT",
+        debtName: currentTitle, totalAmount: currentAmount, currency: currentCurrency,
+        debtType: "PERSONAL", status: "ACTIVE",
+        confidenceScore: entry.confidenceScore, rawText: entry.rawText,
+      } as ParsedDebt);
+    } else if (newType === "COMMITMENT") {
+      onUpdate({
+        id: entry.id, type: "COMMITMENT",
+        title: currentTitle, amount: currentAmount, currency: currentCurrency,
+        dueDate: currentDate || "", priority: "MEDIUM",
+        confidenceScore: entry.confidenceScore, rawText: entry.rawText,
+      } as ParsedCommitment);
+    } else if (newType === "PURCHASE_GOAL") {
+      onUpdate({
+        id: entry.id, type: "PURCHASE_GOAL",
+        itemName: currentTitle, estimatedCost: currentAmount, currency: currentCurrency,
+        targetDate: currentDate || "", priority: "MEDIUM",
+        confidenceScore: entry.confidenceScore, rawText: entry.rawText,
+      } as ParsedPurchaseGoal);
+    }
   }
 
   const rowBg = hasError
@@ -168,10 +212,23 @@ function EditableRow({
       </td>
 
       {/* Type */}
-      <td className="px-2 py-2.5 w-24">
-        <span className={`text-xs font-medium ${meta.color}`}>
-          {meta.icon} {meta.label}
-        </span>
+      <td className="px-2 py-2.5 w-28">
+        {editing ? (
+          <select
+            className="bg-gray-700 border border-gray-600 rounded text-xs px-1 py-1 outline-none w-full"
+            value={entry.type}
+            onChange={(e) => setType(e.target.value as ParsedEntry["type"])}>
+            <option value="EXPENSE">↑ Expense</option>
+            <option value="INCOME">↓ Income</option>
+            <option value="DEBT">⚠ Debt</option>
+            <option value="COMMITMENT">📅 Commitment</option>
+            <option value="PURCHASE_GOAL">🎯 Goal</option>
+          </select>
+        ) : (
+          <span className={`text-xs font-medium ${meta.color}`}>
+            {meta.icon} {meta.label}
+          </span>
+        )}
       </td>
 
       {/* Title */}
@@ -245,7 +302,7 @@ function EditableRow({
 
       {/* Date */}
       <td className="px-2 py-2.5 w-28">
-        {(entry.type === "EXPENSE" || entry.type === "INCOME" || entry.type === "COMMITMENT") ? (
+        {entry.type !== "DEBT" ? (
           editing ? (
             <input
               type="date"
@@ -254,7 +311,7 @@ function EditableRow({
               onChange={(e) => setDate(e.target.value)}
             />
           ) : (
-            <span className="text-xs text-gray-400 font-mono">{getDate()}</span>
+            <span className="text-xs text-gray-400 font-mono">{getDate() || "—"}</span>
           )
         ) : (
           <span className="text-xs text-gray-600">—</span>
