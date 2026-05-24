@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Conversation } from "@/types";
 
 interface SidebarProps {
@@ -21,6 +23,7 @@ export default function Sidebar({
   isOpen,
   onToggle,
 }: SidebarProps) {
+  const pathname = usePathname();
   return (
     <>
       {/* Mobile overlay */}
@@ -106,6 +109,24 @@ export default function Sidebar({
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Tools */}
+        <div className='px-3 pb-3 border-t border-gray-800 pt-3'>
+          <p className='text-[10px] uppercase tracking-wider text-gray-600 px-2 mb-1.5'>Tools</p>
+          <Link
+            href='/finance-import'
+            className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors ${
+              pathname === "/finance-import"
+                ? "bg-gray-800 text-purple-300"
+                : "text-gray-400 hover:bg-gray-800/50 hover:text-white"
+            }`}>
+            <svg className='w-4 h-4 shrink-0' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+              <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2}
+                d='M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4' />
+            </svg>
+            Finance Import
+          </Link>
         </div>
 
         {/* Footer */}
